@@ -38,6 +38,7 @@ const App = () => {
         <div className="app-content">
           <Sidebar />
           <Routes>
+            <Route path="/" element={<List openPopup={openPopup} />} />
             <Route path="/add" element={<Add />}></Route>
             <Route
               path="/list"

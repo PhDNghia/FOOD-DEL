@@ -32,33 +32,19 @@ const LoginPopup = ({ setShowLogin }) => {
 
     const response = await axios.post(newUrl, data);
     if (response.data.success) {
-      // Lưu thông tin vào localStorage và cập nhật context
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("role", response.data.role);
 
-      // Cập nhật giá trị vào StoreContext
       setToken(response.data.token);
 
       const role = localStorage.getItem("role");
       const token = localStorage.getItem("token");
+      console.log(token, role);
+
       if (role === "1") {
-        window.location.href = `http://localhost:5174?token=${token}`;
-        // fetch("http://localhost:5174", {
-        //   method: "GET", // hoặc POST tùy vào API
-        //   headers: {
-        //     Authorization: { token },
-        //     "Content-Type": "application/json",
-        //   },
-        // })
-        //   .then((response) => response.json())
-        //   .then((data) => {
-        //     console.log("Success:", data);
-        //     // Sau khi hoàn thành yêu cầu, thực hiện điều hướng trang
-        //     window.location.href = "http://localhost:5174";
-        //   })
-        //   .catch((error) => {
-        //     console.log("Error:", error);
-        //   });
+        window.location.href = `http://localhost:5174/?role=${role}&token=${token}`;
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
       } else if (role === "2") {
         window.location.href = "http://localhost:5173/";
       }
